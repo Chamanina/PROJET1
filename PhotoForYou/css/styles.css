@@ -680,3 +680,54 @@ height: 400px;
 	width: auto;
 	overflow: visible;
 }
+
+
+
+/*ACHAT DE CREDITS*/
+
+.container_achat {
+  border-radius: 10px;
+  position: relative;
+  display:inline-block;
+  width: 255px;
+  height: 300px;
+  margin: none;
+}
+
+.image_achat {
+  border-radius: 10px;
+  display: inline-block;
+width: 255px;
+  height: 300px;
+}
+
+.overlay_achat {
+	border-radius: 10px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 255px;
+  height: 300px;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #666;
+   z-index: 10;
+}
+
+.container_achat:hover .overlay_achat {
+  opacity: 1;
+}
+
+.text_achat {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}

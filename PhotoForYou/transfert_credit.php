@@ -10,25 +10,31 @@
 	$credit_user = $_POST['credit_user'];
 
 	 include('./function/php/requete.php');
-	 $rs_select_id = select_id($_SESSION['email_user'], $dbc);
+	
 	
 	if(empty($credit_user))
 	{
-		echo('Le champs "Nombre de crédit" attend une valeur numérique.');
+		echo('• Le champs "Nombre de crédit" attend une valeur numérique.<br/>');
 	}
-	if($credit_user <= 0)
+	if($credit_user <= 4)
 	{
-		echo ('Veuillez saisir un nombre de crédit supérieur à 0.');
+		echo ('• Veuillez saisir un nombre de crédit d\'au moins 5. <br/> <br/>');
 	}
 	
 	else 
 	{
-		$q = mysqli_fetch_assoc($rs_select_id);
+		
 		$sql = "UPDATE user 
-				SET credit_user = ".$credit_user."
-				WHERE email_user = ".$q['idUser'].";";
+				SET credit_user = credit_user + $credit_user
+				WHERE email_user = '".$_SESSION['email_user']."';";
 		$exec = mysqli_query($dbc, $sql);
-		echo('Nous vous remercions de votre achat ! :-) ');
+		echo('Nous vous remercions de votre achat ! :-) <br/><br/>
+
+			<form enctype="multipart/form-data" action="achatcredits.php" method="post">
+         		<input type="submit" name="Envoie" value="ACHETER PLUS DE CREDITS" class="formbutton"/> <br/><br/>
+         	</form> ');
+
+
 	}
 		// echo 'Voici quelques informations de débogage :';
 		// print_r($_FILES);

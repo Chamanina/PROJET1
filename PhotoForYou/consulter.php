@@ -38,7 +38,7 @@
             </div>
             <div id="caption">'.$row['nom_img'].' <br/><br/>
               <center>
-                <a href="'.$row['lien_php'].'"><button class="formbutton">ACHETER LA PHOTO</button></a><br/>
+                <a href="'.$row['lien_php'].'"><button class="formbutton">VOIR LA PAGE</button></a><br/>
               </center>
             </div>
           </div>

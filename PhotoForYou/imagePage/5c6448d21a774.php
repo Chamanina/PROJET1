@@ -64,9 +64,11 @@
 
 Accedebant enim eius asperitati, ubi inminuta vel laesa amplitudo imperii dicebatur, et iracundae suspicionum quantitati proximorum cruentae blanditiae exaggerantium incidentia et dolere inpendio simulantium, si principis periclitetur vita, a cuius salute velut filo pendere statum orbis terrarum fictis vocibus exclamabant.</p> 
 												<p> LE PRIX : 20 </p> 
-												<center>
-													<input type="submit" value="ACHETER LA PHOTO" name="submit_button" id="submit_button" class="formbutton" onclick=""/><br/><br/>
-												</center>
+												<form action="../transfert_achat.php" method="post">
+													<center>
+														<input type="submit" value="ACHETER LA PHOTO" name="submit_button" id="submit_button" class="formbutton"/><br/><br/>
+													</center>
+												</form>
 										</div>
 
 										<div id="footer">
