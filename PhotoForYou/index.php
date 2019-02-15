@@ -15,8 +15,10 @@
 <html>
   <body>
     <h1>Bienvenue sur PhotoForYou</h1>
-    <p>Créé en 2019, le site "PhotoForYou" a pour but la vente de photographie par des photographes amateurs ou professionnels.<br/>
-      Les photographies sont exclusives et toutes classées selon la catégorie correspondante ce qui les rendent UNIQUES !</p>
+    <p>Créé en 2019, le site "PhotoForYou" a pour but la vente de photographie par des photographes amateurs ou professionnels certifiés et autorisés à vendre leurs oeuvres.<br/>
+      Les photographies sont exclusives et toutes classées selon la catégorie correspondante ce qui les rendent UNIQUES !<br/><br/>
+
+      Novitates autem si spem adferunt, ut tamquam in herbis non fallacibus fructus appareat, non sunt illae quidem repudiandae, vetustas tamen suo loco conservanda; maxima est enim vis vetustatis et consuetudinis. Quin in ipso equo, cuius modo feci mentionem, si nulla res impediat, nemo est, quin eo, quo consuevit, libentius utatur quam intractato et novo. Nec vero in hoc quod est animal, sed in iis etiam quae sunt inanima, consuetudo valet, cum locis ipsis delectemur, montuosis etiam et silvestribus, in quibus diutius commorati sumus.</p>
 
   <div class="slideshow-container">
     <div class="mySlides fade">

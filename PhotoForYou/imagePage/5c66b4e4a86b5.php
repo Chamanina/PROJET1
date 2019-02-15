@@ -56,16 +56,13 @@
 									</div> 
 									<div id="body"> 
 										<div id="content"></div> 
-											<h1 style="text-align: center; text-decoration: underline;"> Jungle Paradise </h1><br/> 
-											<img src="../image/jungle.jpg" style="width:775px ; border-radius: 5px" /><br/><br/>
-
+											<h1 style="text-align: center; text-decoration: underline;">lplpm </h1><br/> 
+											<img src="../image/plage.jpg"style="width:775px ; border-radius: 5px" /><br/><br/>
 											<p><strong>Photographe :</strong> Caroline PONS </p>
 											<p><strong>Catégorie :</strong> Paysage  </p> 
-											<p>Tu autem, Fanni, quod mihi tantum tribui dicis quantum ego nec adgnosco nec postulo, facis amice; sed, ut mihi videris, non recte iudicas de Catone; aut enim nemo, quod quidem magis credo, aut si quisquam, ille sapiens fuit. Quo modo, ut alia omittam, mortem filii tulit! memineram Paulum, videram Galum, sed hi in pueris, Cato in perfecto et spectato viro.
-
-Accedebant enim eius asperitati, ubi inminuta vel laesa amplitudo imperii dicebatur, et iracundae suspicionum quantitati proximorum cruentae blanditiae exaggerantium incidentia et dolere inpendio simulantium, si principis periclitetur vita, a cuius salute velut filo pendere statum orbis terrarum fictis vocibus exclamabant.</p> 
-												<p><strong> LE PRIX :</strong> 10 </p>
-										<?php 
+											<p>!ùùl</p> 
+												<p><strong>LE PRIX :</strong> 60 </p> 
+												<?php 
 										if(empty($_SESSION['email_user']))
 										{
 											echo('<center>
@@ -77,15 +74,13 @@ Accedebant enim eius asperitati, ubi inminuta vel laesa amplitudo imperii diceba
 										} 
 										else 
 										{
-												echo('
-													<form name="frm" id="form_doc" method="post" action="../transfert_achat.php">
+												echo('<form name="frm" id="form_doc" method="post" action="../transfert_achat.php">
 													<center>
 													   <input type="submit" value="ACHETER LA PHOTO" name="submit_button" id="submit_button" class="formbutton"/><br/><br/>
 													</center>
 													</form>');
 										}
 										?>
-												
 										</div>
 
 										<div id="footer">

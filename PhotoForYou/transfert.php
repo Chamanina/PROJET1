@@ -36,9 +36,10 @@
 	{
 		echo ('Un titre est attendu.');
 	}
-	if(empty($prix_img)) 
+	if(empty($prix_img OR $prix_img <= 21)) 
 	{
-		echo ('Un prix doit être rentré pour la vente.');
+		echo ('Un prix doit être rentré pour la vente.'
+				);
 	}
 	if(empty($description_img)) 
 	{
@@ -135,15 +136,31 @@
 									</div> 
 									<div id="body"> 
 										<div id="content"></div> 
-											<h1 style="text-align: center"> '.$nom_img.' </h1><br/> 
-											<img src="../'.$uploadfile.'"" style="width:775px" />
-											<p>Photographe : '.$q['prenom_user'].' '.$q['nom_user'].' </p>
-											<p>Catégorie : '.$rq['nom_categ'].'  </p> 
+											<h1 style="text-align: center; text-decoration: underline;">'.$nom_img.' </h1><br/> 
+											<img src="../'.$uploadfile.'"style="width:775px ; border-radius: 5px" /><br/><br/>
+											<p><strong>Photographe :</strong> '.$q['prenom_user'].' '.$q['nom_user'].' </p>
+											<p><strong>Catégorie :</strong> '.$rq['nom_categ'].'  </p> 
 											<p>'.$description_img.'</p> 
-												<p> LE PRIX : '.$prix_img.' </p> 
-												<center>
-													<input type="submit" value="ACHETER LA PHOTO" name="submit_button" id="submit_button" class="formbutton" onclick=""/><br/><br/>
+												<p><strong>LE PRIX :</strong> '.$prix_img.' </p> 
+												<?php 
+										if(empty($_SESSION[\'email_user\']))
+										{
+											echo(\'<center>
+													<input type="hidden" value="ACHETER LA PHOTO" name="submit_button" id="submit_button" class="formbutton" onclick=""/>
+														<strong>Connectez-vous pour pouvoir acheter la photographie.</strong>
+													<br/><br/>
 												</center>
+												\');
+										} 
+										else 
+										{
+												echo(\'<form name="frm" id="form_doc" method="post" action="../transfert_achat.php">
+													<center>
+													   <input type="submit" value="ACHETER LA PHOTO" name="submit_button" id="submit_button" class="formbutton"/><br/><br/>
+													</center>
+													</form>\');
+										}
+										?>
 										</div>
 
 										<div id="footer">

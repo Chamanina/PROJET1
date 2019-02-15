@@ -11,26 +11,40 @@
         $q = "SELECT email_user, mdp_user, type_user FROM user WHERE email_user = '".$_POST['email']."';";
         $r = mysqli_query ($dbc, $q);
         list($email,$motdepasse,$type)=mysqli_fetch_array($r,MYSQLI_NUM);
-        if (empty($email)){
+        if (empty($email))
+        {
             echo 'Votre E-mail n\'est pas indiqué ou n\'existe pas.';
             $var = '';
-        } else {
+        } 
+        else 
+        {
         	$var = 'Le mot de passe est nécessaire afin de pouvoir se connecter.';
         	// echo $motdepasse;
         	$pass_correct = password_verify($_POST['pass'], $motdepasse);
             
-            if($pass_correct){
+            if($pass_correct)
+            {
+
                session_start();
-                $_SESSION['email_user'] = $_POST['email'];
-                $_SESSION['type_user'] = $_POST['type'];
+            
+                include('./function/php/requete.php');
+           
+                $_SESSION['email_user'] = $_POST['email']; 
+                $_SESSION['type_user'] = $_POST['type_user'];
+
+
+                
             
                 header('Location: index.php');
                 exit();
-                 
+                  
             }
         }
         echo $var;
-    } else {
+       ;
+    } 
+    else 
+    {
 ?>
 
 <form action="connexion.php" method="post" accept-charset="utf-8">

@@ -21,9 +21,9 @@
 
 
 	
-		// echo 'Voici quelques informations de débogage :';
-		// print_r($_FILES);
-		// echo '</pre>';
+		echo 'Voici quelques informations de débogage :';
+		print_r($_SESSION['type_user']);
+		echo '</pre>';
 
 
 

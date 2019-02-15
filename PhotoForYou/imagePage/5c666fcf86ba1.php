@@ -56,16 +56,15 @@
 									</div> 
 									<div id="body"> 
 										<div id="content"></div> 
-											<h1 style="text-align: center; text-decoration: underline;"> Jungle Paradise </h1><br/> 
-											<img src="../image/jungle.jpg" style="width:775px ; border-radius: 5px" /><br/><br/>
-
+											<h1 style="text-align: center"> Crayon d\'eau </h1><br/> 
+											<img src="../image/crayon.jpg"style="width:775px ; border-radius: 5px" /><br/><br/>
 											<p><strong>Photographe :</strong> Caroline PONS </p>
-											<p><strong>Catégorie :</strong> Paysage  </p> 
-											<p>Tu autem, Fanni, quod mihi tantum tribui dicis quantum ego nec adgnosco nec postulo, facis amice; sed, ut mihi videris, non recte iudicas de Catone; aut enim nemo, quod quidem magis credo, aut si quisquam, ille sapiens fuit. Quo modo, ut alia omittam, mortem filii tulit! memineram Paulum, videram Galum, sed hi in pueris, Cato in perfecto et spectato viro.
+											<p><strong>Catégorie :</strong> Art  </p> 
+											<p>Et interdum acciderat, ut siquid in penetrali secreto nullo citerioris vitae ministro praesente paterfamilias uxori susurrasset in aurem, velut Amphiarao referente aut Marcio, quondam vatibus inclitis, postridie disceret imperator. ideoque etiam parietes arcanorum soli conscii timebantur.
 
-Accedebant enim eius asperitati, ubi inminuta vel laesa amplitudo imperii dicebatur, et iracundae suspicionum quantitati proximorum cruentae blanditiae exaggerantium incidentia et dolere inpendio simulantium, si principis periclitetur vita, a cuius salute velut filo pendere statum orbis terrarum fictis vocibus exclamabant.</p> 
-												<p><strong> LE PRIX :</strong> 10 </p>
-										<?php 
+Novitates autem si spem adferunt, ut tamquam in herbis non fallacibus fructus appareat, non sunt illae quidem repudiandae, vetustas tamen suo loco conservanda; maxima est enim vis vetustatis et consuetudinis. Quin in ipso equo, cuius modo feci mentionem, si nulla res impediat, nemo est, quin eo, quo consuevit, libentius utatur quam intractato et novo. Nec vero in hoc quod est animal, sed in iis etiam quae sunt inanima, consuetudo valet, cum locis ipsis delectemur, montuosis etiam et silvestribus, in quibus diutius commorati sumus.</p> 
+												<p><strong>LE PRIX :</strong> 10 </p> 
+												<?php 
 										if(empty($_SESSION['email_user']))
 										{
 											echo('<center>
@@ -77,15 +76,11 @@ Accedebant enim eius asperitati, ubi inminuta vel laesa amplitudo imperii diceba
 										} 
 										else 
 										{
-												echo('
-													<form name="frm" id="form_doc" method="post" action="../transfert_achat.php">
-													<center>
-													   <input type="submit" value="ACHETER LA PHOTO" name="submit_button" id="submit_button" class="formbutton"/><br/><br/>
-													</center>
-													</form>');
+												echo('<center>
+													<input type="submit" value="ACHETER LA PHOTO" name="submit_button" id="submit_button" class="formbutton" onclick=""/><br/><br/>
+												</center>');
 										}
 										?>
-												
 										</div>
 
 										<div id="footer">
