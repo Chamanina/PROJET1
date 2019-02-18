@@ -29,7 +29,7 @@
         $i++;
         echo('
           <div class="container1">
-            <img id="image'.$i.'" alt="" width="255" height="180" onclick="onClick(this, '.$i.')" class="modal-hover-opacity" style="max-width:100%;cursor:pointer"  src="'.$row['lien_img'].'"/>
+            <img id="image'.$i.'" alt="" width="280" height="180" onclick="onClick(this, '.$i.')" class="modal-hover-opacity" style="max-width:100%;cursor:pointer"  src="'.$row['lien_img'].'"/>
           </div>
           <div id="modal'.$i.'" class="modal" onclick="this.style.display=\'none\'">
             <span class="close">&times;&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -49,10 +49,6 @@
 	  	
 	   			
 	   
-<?php
-	   	
-
-?>
 
 <!-- Div permettant de cacher l'include(cotedroit.php) -->
 <div style="display: none">

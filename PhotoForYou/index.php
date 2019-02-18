@@ -64,14 +64,19 @@
       <span class="dot" onclick="currentSlide(5)"></span> 
     </div>
   </body>
-</html>
+</html><br/><br/>
 
-<?php 
- 
-  include('./include/cotedroit.php');
-  include('./include/footer.php');
-    
+<div style="display: none">
+<?php
+    include('./include/cotedroit.php');
 ?>
+</div>
+
+
+<?php
+  include('./include/footer.php');
+?>
+
   <script src="./function/js/function_index.js" type="text/javascript"></script>
 
 

@@ -86,6 +86,9 @@
 							DEFINE(\'DB_NAME\',\'PhotoForYou\'); 
 							$dbc=mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME); 
 							mysqli_set_charset($dbc,\'utf8\'); 
+							$prix_img = '.$prix_img.';
+							$lien_php = "'.$lien_php.'";
+							$idUser = '.$q['idUser'].';
 							?> 
 							<!DOCTYPE html> <html lang="fr"> 
 								<head> 
@@ -109,17 +112,33 @@
 											<div class="clear"></div>
 
 									<?php 
-										if (isset($_SESSION[\'email_user\'])) 
-										{ 
-											if ($_SESSION[\'type_user\']=1) 
-											{ 
-												$q=\'SELECT * FROM Menu WHERE idMenu = 1 OR idMenu= 2 OR idMenu= 3 OR idMenu= 6 OR idMenu= 7;\'; 
-											} 
-										} 
-										else 
-										{ 
-											$q=\'SELECT * FROM Menu WHERE idMenu!=1 AND idMenu!=6 AND idMenu!=7;\'; 
-										} 
+										if (isset($_SESSION[\'email_user\']) && ($_SESSION[\'type_user\']) == 1)
+										{
+											$q=\'SELECT * FROM Menu WHERE idMenu = 1
+											OR idMenu= 2
+											OR idMenu= 3
+											OR idMenu= 6
+											OR idMenu= 7
+											OR idMenu= 8;\';
+										}
+										elseif (isset($_SESSION[\'email_user\']) && ($_SESSION[\'type_user\']) == 2)
+										{
+					
+											$q=\'SELECT * FROM Menu WHERE idMenu = 1
+											OR idMenu= 2
+											OR idMenu= 3
+											OR idMenu= 7
+											OR idMenu= 8;\';
+										
+										}
+										else
+										{
+												$q=\'SELECT * FROM Menu
+												WHERE idMenu!=1
+												AND idMenu!=6
+												AND idMenu!=7
+												AND idMenu!=8;\';
+										}
 										$r=mysqli_query($dbc,$q); 
 										$pageactive=basename($_SERVER[\'PHP_SELF\']); 
 										while(list($id,$nom,$url)=mysqli_fetch_array($r,MYSQLI_NUM)) 
@@ -156,6 +175,9 @@
 										{
 												echo(\'<form name="frm" id="form_doc" method="post" action="../transfert_achat.php">
 													<center>
+														<input type="hidden" value="'.$q['idUser'].'" name="idUser"/>
+														<input type="hidden" value="'.$prix_img.'" name="prix_img"/>
+														<input type="hidden" value="'.$lien_php.'" name="lien_php"/>
 													   <input type="submit" value="ACHETER LA PHOTO" name="submit_button" id="submit_button" class="formbutton"/><br/><br/>
 													</center>
 													</form>\');

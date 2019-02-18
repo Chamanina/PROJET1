@@ -8,9 +8,11 @@
     {
         // unset($_SESSION['user']);
         
-        $q = "SELECT email_user, mdp_user, type_user FROM user WHERE email_user = '".$_POST['email']."';";
+        $q = "SELECT idUser, email_user, prenom_user, nom_user, mdp_user, type_user FROM user WHERE email_user = '".$_POST['email']."';";
         $r = mysqli_query ($dbc, $q);
-        list($email,$motdepasse,$type)=mysqli_fetch_array($r,MYSQLI_NUM);
+
+
+        list($idUser, $email, $prenom_user, $nom_user, $motdepasse, $type_user) = mysqli_fetch_array($r,MYSQLI_NUM);
         if (empty($email))
         {
             echo 'Votre E-mail n\'est pas indiqué ou n\'existe pas.';
@@ -29,12 +31,13 @@
             
                 include('./function/php/requete.php');
            
-                $_SESSION['email_user'] = $_POST['email']; 
-                $_SESSION['type_user'] = $_POST['type_user'];
-
-
-                
-            
+                $_SESSION['email_user'] = $email;
+                $_SESSION['prenom_user'] = $prenom_user;
+                $_SESSION['nom_user'] = $nom_user;
+                $_SESSION['type_user'] = $type_user;
+                $_SESSION['idUser'] = $idUser;
+       
+           
                 header('Location: index.php');
                 exit();
                   

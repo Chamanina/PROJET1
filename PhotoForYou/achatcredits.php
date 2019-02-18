@@ -30,21 +30,21 @@
       <form action="./transfert_credit.php" method="post">
 
         <div class="container_achat">
-          <a href="./transfert_credit5.php"  ><img src="imageIndex/jaune.jpg" class="image_achat" id="credit_user" name="credit_user">
+          <a href="./transfert_credit.php?nb_credit=5"  ><img src="imageIndex/jaune.jpg" class="image_achat" id="credit_user" name="credit_user">
           <div class="overlay_achat">
             <div class="text_achat">5 crédits</div>
           </div></a>
         </div>
 
          <div class="container_achat">
-          <a href="./transfert_credit10.php"  ><img src="imageIndex/orange.jpg" class="image_achat" id="credit_user" name="credit_user">
+          <a href="./transfert_credit.php?nb_credit=10"  ><img src="imageIndex/orange.jpg" class="image_achat" id="credit_user" name="credit_user">
           <div class="overlay_achat">
             <div class="text_achat">10 crédits</div>
           </div></a>
         </div>
 
         <div class="container_achat">
-          <a href="./transfert_credit20.php"  ><img src="imageIndex/rouge.jpg" class="image_achat" id="credit_user" name="credit_user">
+          <a href="./transfert_credit.php?nb_credit=20"  ><img src="imageIndex/rouge.jpg" class="image_achat" id="credit_user" name="credit_user">
           <div class="overlay_achat">
             <div class="text_achat">20 crédits</div>
           </div></a>

@@ -6,25 +6,35 @@
 ?>
 
 <?php
+	$prix_img = $_POST['prix_img'];
+	$lien_php = $_POST['lien_php'];
+	$idUser = $_POST['idUser'];
 
-	$credit_user = $_POST['credit_user'];
-	
-		$q = "SELECT prix_img FROM image 
-			WHERE lien_php = '".$lien_php."'"; 
-		
+	if(empty($prix_img))
+	{
+		echo('Une erreure est survenue.');
+	}	
+
+	else
+	{
 		$sql = "UPDATE user 
-				SET credit_user = $credit_user - $q
-				WHERE email_user = '".$_SESSION['email_user']."'
-				AND credit_user = '".$_SESSION['email_user']."';";
+				SET credit_user = credit_user - $prix_img 
+				WHERE email_user = '".$_SESSION['email_user']."';";
 		$exec = mysqli_query($dbc, $sql);
+
+		$rq = "UPDATE user
+			SET credit_user = credit_user + ($prix_img * 50 )/ 100
+			WHERE idUser = $idUser;";
+		$exec = mysqli_query($dbc, $rq);
+
+	$q = "DELETE FROM image
+		WHERE lien_php = '".$lien_php."' ;";
+	$exec = mysqli_query($dbc, $q);
 		echo('Nous vous remercions de votre achat ! :-) <br/><br/>');
 
-
-	
-		echo 'Voici quelques informations de débogage :';
-		print_r($_SESSION['type_user']);
-		echo '</pre>';
-
+		
+	}
+		
 
 
 
