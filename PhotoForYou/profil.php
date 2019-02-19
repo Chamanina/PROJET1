@@ -42,10 +42,73 @@
 		</tr>
 
 		</tbody>
-		</table><br/><br/>
+		</table><br/><br/>');
 
-			
-					<center>
+		if (isset($_SESSION['email_user']) && ($_SESSION['type_user']) == 1)
+		{
+			echo('<h3> MES PHOTOS </h3>');
+		
+	 		$query = "SELECT nom_img, prix_img, lien_img, lien_php, description_img 
+	 				FROM image, user
+	 				WHERE user.idUser = image.idUser
+	                AND actif_img = 1
+	                AND email_user = '".$_SESSION['email_user']."';";
+	      	$result = mysqli_query($dbc, $query);
+	      	$i = 0;
+	     	while($row = mysqli_fetch_assoc($result))
+	      	{
+	        	$i++;
+	        	echo('
+	         		<div class="container1">
+	            		<img id="image'.$i.'" alt="" width="280" height="180" onclick="onClick(this, '.$i.')" class="modal-hover-opacity" style="max-width:100%;cursor:pointer"  src="'.$row['lien_img'].'"/>
+	          		</div>
+	          		<div id="modal'.$i.'" class="modal" onclick="this.style.display=\'none\'">
+	            		<span class="close">&times;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	            		<div class="modal-content">
+	              			<img id="img'.$i.'" class="consult_img" style="max-width:100%">
+	            		</div>
+	            		<div id="caption">'.$row['nom_img'].' <br/><br/>
+	              			<center>
+	                			<a href="'.$row['lien_php'].'"><button class="formbutton">VOIR LA PAGE</button></a><br/>
+	              			</center>
+	            		</div>
+	          		</div>');
+      		}
+      		echo ('<br/><br/>');
+      	}
+
+
+
+       echo('<h3>MES PHOTOS ACHETÉES</h3>');
+
+       	$query = "SELECT nom_img, prix_img, lien_img, lien_php, description_img 
+ 				FROM image, user
+ 				WHERE user.idUser = image.idAcheteur
+                AND idAcheteur = ".$_SESSION['idUser'].";";
+      	$result = mysqli_query($dbc, $query);
+      	$i = 0;
+     	while($row = mysqli_fetch_assoc($result))
+      	{
+        	$i++;
+        	echo('
+         		<div class="container1">
+            		<img id="image'.$i.'" alt="" width="280" height="180" onclick="onClick(this, '.$i.')" class="modal-hover-opacity" style="max-width:100%;cursor:pointer"  src="'.$row['lien_img'].'"/>
+          		</div>
+          		<div id="modal'.$i.'" class="modal" onclick="this.style.display=\'none\'">
+            		<span class="close">&times;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            		<div class="modal-content">
+              			<img id="img'.$i.'" class="consult_img" style="max-width:100%">
+            		</div>
+            		<div id="caption">'.$row['nom_img'].' <br/><br/>
+              			<center>
+                			<a href="'.$row['lien_php'].'"><button class="formbutton">VOIR LA PAGE</button></a><br/>
+              			</center>
+            		</div>
+          		</div>');
+      	}
+
+       echo('<h3>SUPPRESSION DU COMPTE</h3><br/><br/>
+       		<center>
 						<a href="./transfert_delete_compte.php?confirmation=false"> <input type="submit" id="submit_button" class="formbutton" value="SUPPRIMER LE COMPTE"/></a>
 					</center>
 			<br/><br>');
@@ -63,3 +126,5 @@
 <?php
   include('./include/footer.php');
 ?>
+<script src="./function/js/function_modal.js" type="text/javascript"></script>
+

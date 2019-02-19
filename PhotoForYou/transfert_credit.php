@@ -45,10 +45,18 @@ $nb_credit = $_GET['nb_credit'];
 
 	if($nb_credit == 5 )
 	{
-		$sql = "UPDATE user 
+		$update_credit5 = "UPDATE user 
 				SET credit_user = credit_user + 5
 	 			WHERE email_user = '".$_SESSION['email_user']."';";
-		$exec = mysqli_query($dbc, $sql);
+		$exec = mysqli_query($dbc, $update_credit5);
+
+		$select_credit ="SELECT credit_user
+				FROM user
+				WHERE email_user = '".$_SESSION['email_user']."';";
+		$exec = mysqli_query($dbc, $select_credit);
+		$result = mysqli_fetch_assoc($exec);
+		$_SESSION['credit_user'] = $result['credit_user'];
+
 
 		echo('Nous vous remercions de votre achat d\'un montant de 5 crédits ! :-) <br/><br/>
 
@@ -59,10 +67,17 @@ $nb_credit = $_GET['nb_credit'];
 	}
 	if($nb_credit == 10)
 	{
-		$sql = "UPDATE user 
+		$update_credit10 = "UPDATE user 
 				SET credit_user = credit_user + 10
 	 			WHERE email_user = '".$_SESSION['email_user']."';";
-		$exec = mysqli_query($dbc, $sql);
+		$exec = mysqli_query($dbc, $update_credit10);
+
+		$select_credit ="SELECT credit_user
+				FROM user
+				WHERE email_user = '".$_SESSION['email_user']."';";
+		$exec = mysqli_query($dbc, $select_credit);
+		$result = mysqli_fetch_assoc($exec);
+		$_SESSION['credit_user'] = $result['credit_user'];
 
 		echo('Nous vous remercions de votre achat d\'un montant de 10 crédits ! :-) <br/><br/>
 
@@ -76,6 +91,13 @@ $nb_credit = $_GET['nb_credit'];
 				SET credit_user = credit_user + 20
 	 			WHERE email_user = '".$_SESSION['email_user']."';";
 		$exec = mysqli_query($dbc, $sql);
+
+		$sql1 ="SELECT credit_user
+				FROM user
+				WHERE email_user = '".$_SESSION['email_user']."';";
+		$exec1 = mysqli_query($dbc, $sql1);
+		$result = mysqli_fetch_assoc($exec1);
+		$_SESSION['credit_user'] = $result['credit_user'];
 
 		echo('Nous vous remercions de votre achat d\'un montant de 20 crédits ! :-) <br/><br/>
 

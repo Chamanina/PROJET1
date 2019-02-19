@@ -10,29 +10,37 @@
 	$lien_php = $_POST['lien_php'];
 	$idUser = $_POST['idUser'];
 
-	if(empty($prix_img))
+	if($_SESSION['credit_user'] < $prix_img)
 	{
-		echo('Une erreure est survenue.');
-	}	
-
+		echo('Vous n\'avez pas assez de crédits ...');
+	}
 	else
 	{
-		$sql = "UPDATE user 
+		$update_credit_client = "UPDATE user 
 				SET credit_user = credit_user - $prix_img 
 				WHERE email_user = '".$_SESSION['email_user']."';";
-		$exec = mysqli_query($dbc, $sql);
+		$exec = mysqli_query($dbc, $update_credit_client);
 
-		$rq = "UPDATE user
+		$select_credit ="SELECT credit_user
+				FROM user
+				WHERE email_user = '".$_SESSION['email_user']."';";
+		$exec = mysqli_query($dbc, $select_credit);
+		$result = mysqli_fetch_assoc($exec);
+		$_SESSION['credit_user'] = $result['credit_user'];
+
+		$update_credit_photographe = "UPDATE user
 			SET credit_user = credit_user + ($prix_img * 50 )/ 100
 			WHERE idUser = $idUser;";
-		$exec = mysqli_query($dbc, $rq);
+		$exec = mysqli_query($dbc, $update_credit_photographe);
 
-	$q = "DELETE FROM image
-		WHERE lien_php = '".$lien_php."' ;";
-	$exec = mysqli_query($dbc, $q);
-		echo('Nous vous remercions de votre achat ! :-) <br/><br/>');
 
-		
+		$update_actif = "UPDATE image
+			SET actif_img = 0, 
+			idAcheteur = ".$_SESSION['idUser']." 
+			WHERE lien_php = '".$lien_php."' ;";
+		$exec = mysqli_query($dbc, $update_actif);
+			echo('Nous vous remercions de votre achat ! :-) <br/><br/>');
+
 	}
 		
 

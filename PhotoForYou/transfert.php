@@ -11,6 +11,7 @@
 	$prix_img = $_POST['prix_img'];
 	$categ_img = $_POST['l_categ'];
 	$description_img = $_POST['description_img'];
+	$actif_img = 1; 
 	// uniqid : Génère un identifiant unique, préfixé, basé sur la date et heure courante en microsecondes.
 	$lien_php = 'imagePage/'.uniqid().'.php';
 
@@ -67,8 +68,8 @@
     			$rq= mysqli_fetch_assoc($rs_select_nom_categ);
 
     			$q = mysqli_fetch_assoc($rs_select_id);
-				$sql = "INSERT INTO image (nom_img, prix_img, lien_img, lien_php, description_img, categ_img, idUser)
-							VALUES ('".$nom_img."', ".$prix_img.", '".$uploadfile."', '".$lien_php."', '".$description_img."', ".$categ_img." ,".$q['idUser'].");";
+				$sql = "INSERT INTO image (nom_img, prix_img, lien_img, lien_php, description_img, categ_img, idUser, actif_img)
+							VALUES ('".$nom_img."', ".$prix_img.", '".$uploadfile."', '".$lien_php."', '".$description_img."', ".$categ_img." ,".$q['idUser'].", ".$actif_img.");";
 					$exec = mysqli_query($dbc, $sql);
 					echo('<form action="ajout.php" method="post" accept-charset="utf-8" style="padding-left:100px">
 						<br/><br/>
@@ -88,7 +89,9 @@
 							mysqli_set_charset($dbc,\'utf8\'); 
 							$prix_img = '.$prix_img.';
 							$lien_php = "'.$lien_php.'";
+							$lien_img = "'.$uploadfile.'";
 							$idUser = '.$q['idUser'].';
+							$actif_img = '.$actif_img.';
 							?> 
 							<!DOCTYPE html> <html lang="fr"> 
 								<head> 
@@ -161,7 +164,15 @@
 											<p><strong>Catégorie :</strong> '.$rq['nom_categ'].'  </p> 
 											<p>'.$description_img.'</p> 
 												<p><strong>LE PRIX :</strong> '.$prix_img.' </p> 
-												<?php 
+										<?php 
+
+										$select_acheteur_dl = "SELECT nom_img, prix_img, lien_img, lien_php, description_img, actif_img, idAcheteur
+												FROM image
+									 			WHERE lien_php = \''.$lien_php.'\';";
+									      $exec_dl = mysqli_query($dbc, $select_acheteur_dl);
+									      $result = mysqli_fetch_assoc($exec_dl);
+
+
 										if(empty($_SESSION[\'email_user\']))
 										{
 											echo(\'<center>
@@ -171,11 +182,27 @@
 												</center>
 												\');
 										} 
+
+
+										elseif(isset($_SESSION[\'idUser\']) == $result)
+										{
+											echo(\'<center>
+													<input type="submit" value="TELECHARGER" name="submit_button" id="submit_button" class="formbutton" onclick=""/>
+													<br/><br/>
+												</center>
+												\');
+										} 
+
+
+
+
 										else 
 										{
 												echo(\'<form name="frm" id="form_doc" method="post" action="../transfert_achat.php">
 													<center>
 														<input type="hidden" value="'.$q['idUser'].'" name="idUser"/>
+														<input type="hidden" value="'.$uploadfile.'" name="lien_img"/>
+														<input type="hidden" value="'.$actif_img.'" name="actif_img"/>
 														<input type="hidden" value="'.$prix_img.'" name="prix_img"/>
 														<input type="hidden" value="'.$lien_php.'" name="lien_php"/>
 													   <input type="submit" value="ACHETER LA PHOTO" name="submit_button" id="submit_button" class="formbutton"/><br/><br/>

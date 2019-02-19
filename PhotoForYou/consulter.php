@@ -21,7 +21,8 @@
             <br/></center>
       </form> <br/><br/>');
 
-      $query = "SELECT nom_img, prix_img, lien_img, lien_php, description_img FROM image;";
+      $query = "SELECT nom_img, prix_img, lien_img, lien_php, description_img FROM image
+                WHERE actif_img = 1;";
       $result = mysqli_query($dbc, $query);
       $i = 0;
       while($row = mysqli_fetch_assoc($result))
