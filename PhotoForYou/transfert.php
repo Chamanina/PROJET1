@@ -158,15 +158,18 @@
 									</div> 
 									<div id="body"> 
 										<div id="content"></div> 
+										<center>
 											<h1 style="text-align: center; text-decoration: underline;">'.$nom_img.' </h1><br/> 
 											<img src="../'.$uploadfile.'"style="width:775px ; border-radius: 5px" /><br/><br/>
+										</center>
 											<p><strong>Photographe :</strong> '.$q['prenom_user'].' '.$q['nom_user'].' </p>
 											<p><strong>Catégorie :</strong> '.$rq['nom_categ'].'  </p> 
 											<p>'.$description_img.'</p> 
 												<p><strong>LE PRIX :</strong> '.$prix_img.' </p> 
+
 										<?php 
 
-										$select_acheteur_dl = "SELECT nom_img, prix_img, lien_img, lien_php, description_img, actif_img, idAcheteur
+										$select_acheteur_dl = "SELECT nom_img, prix_img, lien_img, lien_php, description_img, actif_img, idAcheteur, idUser
 												FROM image
 									 			WHERE lien_php = \''.$lien_php.'\';";
 									      $exec_dl = mysqli_query($dbc, $select_acheteur_dl);
@@ -184,14 +187,23 @@
 										} 
 
 
-										elseif(isset($_SESSION[\'idUser\']) == $result)
+										elseif($_SESSION[\'idUser\'] == $result[\'idAcheteur\'])
 										{
-											echo(\'<center>
+											echo(\'<form name="frm" id="form_doc" method="post" action="../transfert_dl.php">
+												<center>
 													<input type="submit" value="TELECHARGER" name="submit_button" id="submit_button" class="formbutton" onclick=""/>
 													<br/><br/>
 												</center>
 												\');
 										} 
+
+										elseif($_SESSION[\'idUser\'] == $result[\'idUser\'])
+										{
+											echo(\'<center>
+													<input type="hidden" value="CONNECTER" name="submit_button" id="submit_button" class="formbutton" onclick=""/>
+													<br/><br/>
+												</center>\');
+										}  
 
 
 
