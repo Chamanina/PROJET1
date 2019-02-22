@@ -11,6 +11,8 @@
 	$prix_img = $_POST['prix_img'];
 	$categ_img = $_POST['l_categ'];
 	$description_img = $_POST['description_img'];
+	$actif_img = 1; 
+	$idAdmin=1;
 	// uniqid : Génère un identifiant unique, préfixé, basé sur la date et heure courante en microsecondes.
 	$lien_php = 'imagePage/'.uniqid().'.php';
 
@@ -36,9 +38,10 @@
 	{
 		echo ('Un titre est attendu.');
 	}
-	if(empty($prix_img)) 
+	if(empty($prix_img OR $prix_img <= 21)) 
 	{
-		echo ('Un prix doit être rentré pour la vente.');
+		echo ('Un prix doit être rentré pour la vente.'
+				);
 	}
 	if(empty($description_img)) 
 	{
@@ -66,8 +69,8 @@
     			$rq= mysqli_fetch_assoc($rs_select_nom_categ);
 
     			$q = mysqli_fetch_assoc($rs_select_id);
-				$sql = "INSERT INTO image (nom_img, prix_img, lien_img, lien_php, description_img, categ_img, idUser)
-							VALUES ('".$nom_img."', ".$prix_img.", '".$uploadfile."', '".$lien_php."', '".$description_img."', ".$categ_img." ,".$q['idUser'].");";
+				$sql = "INSERT INTO image (nom_img, prix_img, lien_img, lien_php, description_img, categ_img, idUser, actif_img, idAdmin)
+							VALUES ('".$nom_img."', ".$prix_img.", '".$uploadfile."', '".$lien_php."', '".$description_img."', ".$categ_img." ,".$q['idUser'].", ".$actif_img.", ".$idAdmin.");";
 					$exec = mysqli_query($dbc, $sql);
 					echo('<form action="ajout.php" method="post" accept-charset="utf-8" style="padding-left:100px">
 						<br/><br/>
@@ -85,6 +88,11 @@
 							DEFINE(\'DB_NAME\',\'PhotoForYou\'); 
 							$dbc=mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME); 
 							mysqli_set_charset($dbc,\'utf8\'); 
+							$prix_img = '.$prix_img.';
+							$lien_php = "'.$lien_php.'";
+							$lien_img = "'.$uploadfile.'";
+							$idUser = '.$q['idUser'].';
+							$actif_img = '.$actif_img.';
 							?> 
 							<!DOCTYPE html> <html lang="fr"> 
 								<head> 
@@ -108,17 +116,43 @@
 											<div class="clear"></div>
 
 									<?php 
-										if (isset($_SESSION[\'email_user\'])) 
-										{ 
-											if ($_SESSION[\'type_user\']=1) 
-											{ 
-												$q=\'SELECT * FROM Menu WHERE idMenu = 1 OR idMenu= 2 OR idMenu= 3 OR idMenu= 6 OR idMenu= 7;\'; 
-											} 
-										} 
-										else 
-										{ 
-											$q=\'SELECT * FROM Menu WHERE idMenu!=1 AND idMenu!=6 AND idMenu!=7;\'; 
-										} 
+										if (isset($_SESSION[\'email_user\']) && ($_SESSION[\'type_user\']) == 1)
+										{
+												$q=\'SELECT * FROM Menu WHERE idMenu = 1
+												OR idMenu= 2
+												OR idMenu= 3
+												OR idMenu= 6
+												OR idMenu= 7
+												OR idMenu= 9;\';
+										}
+										elseif (isset($_SESSION[\'email_user\']) && ($_SESSION[\'type_user\']) == 2)
+										{
+											
+												$q=\'SELECT * FROM Menu WHERE idMenu = 1
+												OR idMenu= 2
+												OR idMenu= 3
+												OR idMenu= 7
+												OR idMenu= 9;\';
+											
+										}
+
+										elseif (isset($_SESSION[\'email_user\']) && ($_SESSION[\'type_user\']) == 3)
+										{
+											
+												$q=\'SELECT * FROM Menu WHERE idMenu = 2
+												OR idMenu= 8
+												OR idMenu= 9;\';
+											
+										}
+											
+										else
+										{
+												$q=\'SELECT * FROM Menu
+												WHERE idMenu=2
+												OR idMenu=3
+												OR idMenu=4
+												OR idMenu=5;\';
+										}
 										$r=mysqli_query($dbc,$q); 
 										$pageactive=basename($_SERVER[\'PHP_SELF\']); 
 										while(list($id,$nom,$url)=mysqli_fetch_array($r,MYSQLI_NUM)) 
@@ -135,15 +169,80 @@
 									</div> 
 									<div id="body"> 
 										<div id="content"></div> 
-											<h1 style="text-align: center"> '.$nom_img.' </h1><br/> 
-											<img src="../'.$uploadfile.'"" style="width:775px" />
-											<p>Photographe : '.$q['prenom_user'].' '.$q['nom_user'].' </p>
-											<p>Catégorie : '.$rq['nom_categ'].'  </p> 
+										<center>
+											<h1 style="text-align: center; text-decoration: underline;">'.$nom_img.' </h1><br/> 
+											<img src="../'.$uploadfile.'"style="width:775px ; border-radius: 5px" /><br/><br/>
+										</center>
+											<p><strong>Photographe :</strong> '.$q['prenom_user'].' '.$q['nom_user'].' </p>
+											<p><strong>Catégorie :</strong> '.$rq['nom_categ'].'  </p> 
 											<p>'.$description_img.'</p> 
-												<p> LE PRIX : '.$prix_img.' </p> 
-												<center>
-													<input type="submit" value="ACHETER LA PHOTO" name="submit_button" id="submit_button" class="formbutton" onclick=""/><br/><br/>
+												<p><strong>LE PRIX :</strong> '.$prix_img.' </p> 
+
+										<?php 
+
+										$select_acheteur_dl = "SELECT nom_img, prix_img, lien_img, lien_php, description_img, actif_img, idAcheteur, idUser, idAdmin
+												FROM image
+									 			WHERE lien_php = \''.$lien_php.'\';";
+									      $exec_dl = mysqli_query($dbc, $select_acheteur_dl);
+									      $result = mysqli_fetch_assoc($exec_dl);
+
+
+										if(empty($_SESSION[\'email_user\']))
+										{
+											echo(\'<center>
+													<input type="hidden" value="ACHETER LA PHOTO" name="submit_button" id="submit_button" class="formbutton" onclick=""/>
+														<strong>Connectez-vous pour pouvoir acheter la photographie.</strong>
+													<br/><br/>
 												</center>
+												\');
+										} 
+
+
+										elseif($_SESSION[\'idUser\'] == $result[\'idAcheteur\'])
+										{
+											echo(\'
+												<center>
+												<a href="../transfert_dl.php?file='.$uploadfile.'">
+													<input type="submit" value="TELECHARGER" name="submit_button" id="submit_button" class="formbutton" onclick=""/>
+													<br/><br/>
+												</center>
+												\');
+										} 
+
+										elseif($_SESSION[\'idUser\'] == $result[\'idUser\'])
+										{
+											echo(\'<center>
+													<input type="hidden" value="CONNECTER" name="submit_button" id="submit_button" class="formbutton" onclick=""/>
+													<br/><br/>
+												</center>\');
+										}  
+
+										elseif($_SESSION[\'idUser\'] == $result[\'idAdmin\'])
+										{
+											echo(\'<center>
+											<a href="../transfert_delete_img.php?file_delete='.$lien_php.'&amp;confirmation=false">
+													<input type="submit" value="SUPPRIMER LA PHOTO" name="submit_button" id="submit_button" class="formbutton" onclick=""/>
+													<br/><br/>
+												</center>\');
+										}  
+
+
+
+
+										else 
+										{
+												echo(\'<form name="frm" id="form_doc" method="post" action="../transfert_achat.php">
+													<center>
+														<input type="hidden" value="'.$q['idUser'].'" name="idUser"/>
+														<input type="hidden" value="'.$uploadfile.'" name="lien_img"/>
+														<input type="hidden" value="'.$actif_img.'" name="actif_img"/>
+														<input type="hidden" value="'.$prix_img.'" name="prix_img"/>
+														<input type="hidden" value="'.$lien_php.'" name="lien_php"/>
+													   <input type="submit" value="ACHETER LA PHOTO" name="submit_button" id="submit_button" class="formbutton"/><br/><br/>
+													</center>
+													</form>\');
+										}
+										?>
 										</div>
 
 										<div id="footer">

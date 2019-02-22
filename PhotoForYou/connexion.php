@@ -8,29 +8,47 @@
     {
         // unset($_SESSION['user']);
         
-        $q = "SELECT email_user, mdp_user, type_user FROM user WHERE email_user = '".$_POST['email']."';";
+        $q = "SELECT idUser, email_user, prenom_user, nom_user, mdp_user, type_user, credit_user FROM user WHERE email_user = '".$_POST['email']."';";
         $r = mysqli_query ($dbc, $q);
-        list($email,$motdepasse,$type)=mysqli_fetch_array($r,MYSQLI_NUM);
-        if (empty($email)){
+
+
+        list($idUser, $email, $prenom_user, $nom_user, $motdepasse, $type_user, $credit_user) = mysqli_fetch_array($r,MYSQLI_NUM);
+        if (empty($email))
+        {
             echo 'Votre E-mail n\'est pas indiqué ou n\'existe pas.';
             $var = '';
-        } else {
+        } 
+        else 
+        {
         	$var = 'Le mot de passe est nécessaire afin de pouvoir se connecter.';
         	// echo $motdepasse;
         	$pass_correct = password_verify($_POST['pass'], $motdepasse);
             
-            if($pass_correct){
+            if($pass_correct)
+            {
+
                session_start();
-                $_SESSION['email_user'] = $_POST['email'];
-                $_SESSION['type_user'] = $_POST['type'];
             
+                include('./function/php/requete.php');
+           
+                $_SESSION['email_user'] = $email;
+                $_SESSION['prenom_user'] = $prenom_user;
+                $_SESSION['nom_user'] = $nom_user;
+                $_SESSION['type_user'] = $type_user;
+                $_SESSION['idUser'] = $idUser;
+                $_SESSION['credit_user'] = $credit_user;
+       
+           
                 header('Location: index.php');
                 exit();
-                 
+                  
             }
         }
         echo $var;
-    } else {
+       ;
+    } 
+    else 
+    {
 ?>
 
 <form action="connexion.php" method="post" accept-charset="utf-8">

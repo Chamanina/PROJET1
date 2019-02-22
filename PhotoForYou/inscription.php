@@ -33,16 +33,6 @@
 			$reg_errors['last_name'] = 'Veuillez indiquer votre nom de famille !';
 		}
 	
-		// Vérifier la présence d'un nom d'utilisateur :
-		if (preg_match ('/^[A-Z0-9]{2,30}$/i', $_POST['username'])) 
-		{
-			$u = mysqli_real_escape_string ($dbc, $_POST['username']);
-		} 
-		else 
-		{
-			$reg_errors['username'] = 'Veuillez indiquer le nom d\'utilisateur souhaité !';
-		}
-	
 		// Vérifier la présence d'une adresse e-mail :
 		if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) 
 		{
@@ -86,7 +76,7 @@
 				// Ajouter l'utilisateur à la base de données...
                 // crypter le mdp 
 
-				$q = "INSERT INTO user (idUser,email_user,type_user,prenom_user,nom_user,pseudo_user,mdp_user) VALUES ('','$e', '$t', '$fn', '$ln', '$u', '$p' )";
+				$q = "INSERT INTO user (idUser,email_user,type_user,prenom_user,nom_user,mdp_user) VALUES ('','$e', '$t', '$fn', '$ln', '$p' )";
 
 				$r = mysqli_query ($dbc, $q);
 				if (mysqli_affected_rows($dbc) == 1) 
@@ -114,6 +104,7 @@
 	// Nécessite le script de fonction du formulaire, qui définit create_form_input() :
 ?>
 
+<div id="body">
 <div id="content">
 	
 	<h3>Inscription</h3>
@@ -124,10 +115,6 @@
 	    </p>
 	    <p><label for="last_name"><strong>Nom</strong></label><br />
 	    	<?php create_form_input('last_name', 'text', $reg_errors,""); ?>
-	    </p>
-	    <p><label for="username"><strong>Nom d'utilisateur souhaité</strong></label><br />
-	    	<?php create_form_input('username', 'text', $reg_errors,""); ?> 
-	    	<small>Uniquement des lettres et des chiffres.</small>
 	    </p>
 	    <p><label for="type_user"><strong>Type</strong></label><br />
 	    	<?php create_form_input('type_user', 'select', $reg_errors, array('1'=>'photographe','2'=>'client')); ?>
@@ -146,10 +133,13 @@
 	    <br><br>
 	</form>
 
+
+
+
 </div>
 
-
-<?php 
+	<?php 
 include('./include/cotedroit.php');
 include ('./include/footer.php');
 ?>
+</div>

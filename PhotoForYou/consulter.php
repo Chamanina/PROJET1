@@ -21,7 +21,8 @@
             <br/></center>
       </form> <br/><br/>');
 
-      $query = "SELECT nom_img, prix_img, lien_img, lien_php, description_img FROM image;";
+      $query = "SELECT nom_img, prix_img, lien_img, lien_php, description_img FROM image
+                WHERE actif_img = 1;";
       $result = mysqli_query($dbc, $query);
       $i = 0;
       while($row = mysqli_fetch_assoc($result))
@@ -29,7 +30,7 @@
         $i++;
         echo('
           <div class="container1">
-            <img id="image'.$i.'" alt="" width="255" height="180" onclick="onClick(this, '.$i.')" class="modal-hover-opacity" style="max-width:100%;cursor:pointer"  src="'.$row['lien_img'].'"/>
+            <img id="image'.$i.'" alt="" width="280" height="180" onclick="onClick(this, '.$i.')" class="modal-hover-opacity" style="max-width:100%;cursor:pointer"  src="'.$row['lien_img'].'"/>
           </div>
           <div id="modal'.$i.'" class="modal" onclick="this.style.display=\'none\'">
             <span class="close">&times;&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -38,7 +39,7 @@
             </div>
             <div id="caption">'.$row['nom_img'].' <br/><br/>
               <center>
-                <a href="'.$row['lien_php'].'"><button class="formbutton">ACHETER LA PHOTO</button></a><br/>
+                <a href="'.$row['lien_php'].'"><button class="formbutton">VOIR LA PAGE</button></a><br/>
               </center>
             </div>
           </div>
@@ -49,10 +50,6 @@
 	  	
 	   			
 	   
-<?php
-	   	
-
-?>
 
 <!-- Div permettant de cacher l'include(cotedroit.php) -->
 <div style="display: none">

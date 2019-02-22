@@ -14,9 +14,15 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <h1>Bienvenue sur PhotoForYou</h1>
-    <p>Créé en 2019, le site "PhotoForYou" a pour but la vente de photographie par des photographes amateurs ou professionnels.<br/>
-      Les photographies sont exclusives et toutes classées selon la catégorie correspondante ce qui les rendent UNIQUES !</p>
+    
+    <h1 class="welcome_title">Bienvenue sur PhotoForYou</h1><br/>
+    <h3>PRESENTATION</h3>
+    <p>Créé au courant 2019, <strong>PhotoForYou</strong> a pour objectif de mettre à disposition des photos de différentes catégories, prises par des photographes amateurs ou professionnels !<br/>
+      Les photographies sont exclusives. Cela veut dire qu'elles peuvent appartenir seulement à une et une seule personne, ce qui les rendent UNIQUES!<br/>
+      De plus, les photographies sont classées par catégorie ce qui rend la recherche un peu plus simple et rapide !<br/>
+      <center><strong>Alors profitez tant que la photo est disponible ou ce sera trop tard !</strong></center>
+      <br/><br/>
+    </p>
 
   <div class="slideshow-container">
     <div class="mySlides fade">
@@ -62,14 +68,19 @@
       <span class="dot" onclick="currentSlide(5)"></span> 
     </div>
   </body>
-</html>
+</html><br/><br/>
 
-<?php 
- 
-  include('./include/cotedroit.php');
-  include('./include/footer.php');
-    
+<div style="display: none">
+<?php
+    include('./include/cotedroit.php');
 ?>
+</div>
+
+
+<?php
+  include('./include/footer.php');
+?>
+
   <script src="./function/js/function_index.js" type="text/javascript"></script>
 
 
