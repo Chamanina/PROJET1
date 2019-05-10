@@ -7,44 +7,79 @@
 
 <?php
 
-	$credit_user = $_POST['credit_user'];
+//Update à l'achat de crédit selon le nom de crédit ( $_GET récupère le nombre définis dans achatcredits.php afin d'avoir la requete du montant correspondant au choix)
+	$nb_credit = $_GET['nb_credit'];
 
-	 include('./function/php/requete.php');
-	 $rs_select_id = select_id($_SESSION['email_user'], $dbc);
-	
-	if(empty($credit_user))
+	if($nb_credit == 5 )
 	{
-		echo('Le champs "Nombre de crédit" attend une valeur numérique.');
+		$update_credit5 = "UPDATE user 
+				SET credit_user = credit_user + 5
+	 			WHERE email_user = '".$_SESSION['email_user']."';";
+		$exec = mysqli_query($dbc, $update_credit5);
+
+		$select_credit ="SELECT credit_user
+				FROM user
+				WHERE email_user = '".$_SESSION['email_user']."';";
+		$exec = mysqli_query($dbc, $select_credit);
+		$result = mysqli_fetch_assoc($exec);
+		$_SESSION['credit_user'] = $result['credit_user'];
+
+
+		echo('Nous vous remercions de votre achat d\'un montant de 5 crédits ! :-) <br/><br/>
+
+			<form enctype="multipart/form-data" action="achatcredits.php" method="post">
+         		<input type="submit" name="Envoie" value="ACHETER PLUS DE CREDITS" class="formbutton"/> <br/><br/>
+         	</form> ');
+
 	}
-	if($credit_user <= 0)
+	if($nb_credit == 10)
 	{
-		echo ('Veuillez saisir un nombre de crédit supérieur à 0.');
+		$update_credit10 = "UPDATE user 
+				SET credit_user = credit_user + 10
+	 			WHERE email_user = '".$_SESSION['email_user']."';";
+		$exec = mysqli_query($dbc, $update_credit10);
+
+		$select_credit ="SELECT credit_user
+				FROM user
+				WHERE email_user = '".$_SESSION['email_user']."';";
+		$exec = mysqli_query($dbc, $select_credit);
+		$result = mysqli_fetch_assoc($exec);
+		$_SESSION['credit_user'] = $result['credit_user'];
+
+		echo('Nous vous remercions de votre achat d\'un montant de 10 crédits ! :-) <br/><br/>
+
+			<form enctype="multipart/form-data" action="achatcredits.php" method="post">
+         		<input type="submit" name="Envoie" value="ACHETER PLUS DE CREDITS" class="formbutton"/> <br/><br/>
+         	</form> ');
 	}
-	
-	else 
+	if ($nb_credit == 20) 
 	{
-		$q = mysqli_fetch_assoc($rs_select_id);
-		$sql = "UPDATE user 
-				SET credit_user = ".$credit_user."
-				WHERE email_user = ".$q['idUser'].";";
+	$sql = "UPDATE user 
+				SET credit_user = credit_user + 20
+	 			WHERE email_user = '".$_SESSION['email_user']."';";
 		$exec = mysqli_query($dbc, $sql);
-		echo('Nous vous remercions de votre achat ! :-) ');
+
+		$sql1 ="SELECT credit_user
+				FROM user
+				WHERE email_user = '".$_SESSION['email_user']."';";
+		$exec1 = mysqli_query($dbc, $sql1);
+		$result = mysqli_fetch_assoc($exec1);
+		$_SESSION['credit_user'] = $result['credit_user'];
+
+		echo('Nous vous remercions de votre achat d\'un montant de 20 crédits ! :-) <br/><br/>
+
+			<form enctype="multipart/form-data" action="achatcredits.php" method="post">
+         		<input type="submit" name="Envoie" value="ACHETER PLUS DE CREDITS" class="formbutton"/> <br/><br/>
+         	</form> ');
 	}
-		// echo 'Voici quelques informations de débogage :';
-		// print_r($_FILES);
-		// echo '</pre>';
-
-
-
-
 ?>
- <div style="display: none">
+
+
+ 	<div style="display: none">
 <?php
-    include('./include/cotedroit.php');
+    	include('./include/cotedroit.php');
 ?>
-</div>
-
-
+	</div>
 <?php
-    include('./include/footer.php');
+    	include('./include/footer.php');
 ?>

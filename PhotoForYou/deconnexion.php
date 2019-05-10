@@ -11,7 +11,6 @@
 		header('Location:index.php');
 	}	
 
-
 	include('./include/cotedroit.php');
 	include('./include/footer.php');
    

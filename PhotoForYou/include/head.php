@@ -10,7 +10,6 @@
 			<div id="header">
 			<div id="opacity"> 
     			<h1><a href="./index.php">PhotoForYou</a></h1>
-        		<!-- <h2>Des photos, pour des pros.</h2> -->
         	</div>
         		<div class="clear"></div>
     		</div>
